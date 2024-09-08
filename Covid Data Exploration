@@ -149,8 +149,8 @@ FROM #PercentPopulationVaccinated
 --create view to store data for visualizations
 
 CREATE VIEW PercentPopulationVaccinated AS
-SELECT dea.continent, dea.location,dea.date, dea.population, vac.new_vaccinations
-,SUM(CAST(new_vaccinations AS INT)) OVER (PARTITION BY dea.location ORDER BY dea.location, dea.date) AS rolling_people_vac
+SELECT dea.continent, dea.location,dea.date, dea.population, vac.new_vaccinations,
+SUM(CAST(new_vaccinations AS INT)) OVER (PARTITION BY dea.location ORDER BY dea.location, dea.date) AS rolling_people_vac
 --,(rolling_people_vac/population)*100
 FROM CovidDeaths AS dea
 JOIN CovidVaccinations AS vac
